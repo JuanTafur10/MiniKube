@@ -1,8 +1,5 @@
 package io.learnk8s.knote;
 
-import com.atlassian.commonmark.node.Node;
-import com.atlassian.commonmark.parser.Parser;
-import com.atlassian.commonmark.renderer.html.HtmlRenderer;
 import io.minio.MinioClient;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -94,9 +91,6 @@ class KNoteController {
     @Autowired
     private KnoteProperties properties;
 
-    private Parser parser = Parser.builder().build();
-    private HtmlRenderer renderer = HtmlRenderer.builder().build();
-
     private MinioClient minioClient;
 
     @PostConstruct
@@ -112,7 +106,6 @@ class KNoteController {
                         properties.getMinioAccessKey(),
                         properties.getMinioSecretKey(),
                         false);
-                // Comprueba si el bucket ya existe
                 boolean isExist = minioClient.bucketExists(properties.getMinioBucket());
                 if (isExist) {
                     System.out.println("> Bucket already exists.");
@@ -151,12 +144,7 @@ class KNoteController {
 
     private void saveNote(String description, Model model) {
         if (description != null && !description.trim().isEmpty()) {
-            // Se traduce el Markdown a HTML
-            Node document = parser.parse(description.trim());
-            String html = renderer.render(document);
-            notesRepository.save(new Note(null, html));
-            
-            // Limpia el textarea tras publicar
+            notesRepository.save(new Note(null, description.trim()));
             model.addAttribute("description", "");
         }
     }

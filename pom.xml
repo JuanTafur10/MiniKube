@@ -6,21 +6,19 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.7.15</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/> 
     </parent>
     
     <groupId>io.learnk8s</groupId>
     <artifactId>knote</artifactId>
     <version>2.0.0</version>
     <name>knote</name>
-    <description>A simple note taking app</description>
 
     <properties>
         <java.version>11</java.version>
     </properties>
 
     <dependencies>
-        <!-- Dependencias base del tutorial (Spring Web, Mongo, Freemarker, Actuator, Lombok) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
@@ -42,20 +40,15 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- Dependencia para renderizar Markdown a HTML -->
+        
+        <!-- Dependencia de Markdown (Commonmark) -->
         <dependency>
             <groupId>com.atlassian.commonmark</groupId>
             <artifactId>commonmark</artifactId>
             <version>0.12.1</version>
         </dependency>
 
-        <!-- NUEVAS DEPENDENCIAS PARA MINIO (Stateless) -->
+        <!-- Dependencias de MinIO -->
         <dependency>
             <groupId>io.minio</groupId>
             <artifactId>minio</artifactId>
